@@ -2,6 +2,8 @@ let express = require('express');
 let app = express();
 let PORT = 5000;
 
+// AJAX = Asynchronous Javascript and XML
+
 app.use(express.static('server/public'));
 
 let quotesData = [
@@ -10,8 +12,21 @@ let quotesData = [
     { quote: 'Intelligence plus character-that is the goal of true education.', author: 'Martin Luther King, Jr.' }
 ];
 
-app.get('/quotes', function(req, res) {
+app.get('/quotes', (req, res) => {
     res.send(quotesData);
 })
 
-app.listen(PORT);
+app.post('/quotes', (req, res) => {
+    res.send(quotesData);
+})
+
+app.get('/new-quote', (req, res) => {
+    let quote = {quote: 'I love learning', author: 'Everyone'};
+    // quotesData.push(data);
+    quotesData.push(quote);
+    res.send(quote);
+})
+
+app.listen(PORT, () => {
+    console.log('Running on port:', PORT);  
+});
